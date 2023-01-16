@@ -8,5 +8,11 @@ pytest -s -v --alluredir=alureress - запускаем тесты и генер
 
 allure serve alureress - запускаем отчет allure
 
+Если не установлен allure 
+
+1) Установить Java
+2) Установить Allure
+
+
 
 
