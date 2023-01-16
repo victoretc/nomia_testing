@@ -1,10 +1,12 @@
 # nomia_testing
+python3 -m venv venv
+source venv/bin/activate
 
-pip3 install requirements.txt 
+pip3 install -r requirements.txt 
 
-pytest -s -v --alluredir=alureress
+pytest -s -v --alluredir=alureress - запускаем тесты и генерируем отчет allure
 
-allure serve alureress 
+allure serve alureress - запускаем отчет allure
 
 
 

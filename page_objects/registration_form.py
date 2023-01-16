@@ -14,8 +14,11 @@ class RegistrationForm(SeleniumBase):
         self.__phone_number_field: str = "//input[@name='phone']"
         self.__email_field: str = "//input[@name='email']"
         self.__send_request_button: str = "//button[contains(text(),'Send request')]"
-        self.__agreement_button: str = "//input[@name='checkAgreement']"  #Нужно добавить негативный тест кейс с регистрацией без нажатия чек - бокса
+        self.__agreement_button: str = "//span[@class='check__box']"  #Нужно добавить негативный тест кейс с регистрацией без нажатия чек - бокса
         self.__sucess_form: str = "//div[contains(@class, 'modal active')]" #//div[contains(@class, 'modal__title')] = заявка отпрвлена , //div[contains(@class, 'modal__text')] , //div[contains(@class, 'modal__icon')] 
+        self.__required_field_error: str = "//div[@class = 'input-error-message' and text() = 'Обязательное поле']"
+        self.__invalid_symbol_error: str= "//div[@class = 'input-error-message' and text() = 'Некорректное значение'] "
+
 
     @allure.step('Получение кнопки try for free')
     def get_try_for_free_button(self) -> WebElement:
@@ -48,9 +51,20 @@ class RegistrationForm(SeleniumBase):
     @allure.step('Получение формы успешной отправки данных')
     def get_success_form(self) -> WebElement:
         return self.is_visible('xpath', self.__sucess_form, 'Sucess Form') #нужно расширить тесты с проверкой содержимого формы успеха
-
+    
+    @allure.step('Получение url текущей страницы')
     def get_url(self):
         return self.driver.current_url
+    
+    @allure.step('Получение сообщения об ошибке (Обязательное поле)')
+    def get_error_required_field(self):
+        return self.is_visible('xpath', self.__required_field_error, 'Required Field Error')
+    
+    @allure.step('Получение сообщения об ошибке (Некорректное значение)')
+    def get_error_invalid_symbol(self):
+        return self.is_visible('xpath', self.__invalid_symbol_error, 'Invalid Symbol Error')
+
+    
 
 
    
